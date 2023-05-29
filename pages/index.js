@@ -1,16 +1,15 @@
 import Head from 'next/head'
-import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Banner from '../components/banner'
 
-const inter = Inter({ subsets: ['latin'] })
+
 const handleOnBtn = () => {
   console.log("ok it's work")
 }
 
 export default function Home() {
   return (
-    <div className={`${styles.container} ${inter.className}`}>
+    <div className={styles.container}>
 
       <Head>
         <title>Coffee Connoisseur</title>
