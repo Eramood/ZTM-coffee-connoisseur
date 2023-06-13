@@ -1,7 +1,9 @@
 import Head from 'next/head'
+import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Banner from '../components/banner'
-
+import Card from '../components/card'
+import coffeeStores from '../data/coffee-stores.json'
 
 const handleOnBtn = () => {
   console.log("ok it's work")
@@ -21,11 +23,29 @@ export default function Home() {
       <main className={styles.main}>
         <Banner 
                 buttonText="View stores bearby" 
-                handleOnclick={handleOnBtn}
+                handleOnClick={handleOnBtn}
           />
-      </main>
 
-   
+        <div className={styles.heroImage}>
+        <Image src="/static/hero-image.png" 
+        width={700} height={400}
+        alt="hero img"
+        />
+        </div>
+
+      <div className={styles.cardLayout}>
+        {coffeeStores.map(coffeeStores=>{
+          return ( 
+                 <Card 
+                    key={coffeeStores.id} //solution for "Warning: Each child in a list should have a unique “key” prop." message
+                    name={coffeeStores.name}
+                    imURL={coffeeStores.imgUrl}
+                    href={`/coffee-store/${coffeeStores.id}`}
+                    className={styles.card}
+                  />)
+        })}
+      </div>
+      </main>
     </div>
   )
 }
