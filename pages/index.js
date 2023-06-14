@@ -5,11 +5,24 @@ import Banner from '../components/banner'
 import Card from '../components/card'
 import coffeeStores from '../data/coffee-stores.json'
 
+export async function getStaticProps(context) {
+  return {
+    props: {
+      coffeeStores,
+    }, // will be passed to the page component as props
+  };
+}
+
+
 const handleOnBtn = () => {
   console.log("ok it's work")
 }
 
-export default function Home() {
+export default function Home(props) {
+
+  console.log("props is", props);
+
+
   return (
     <div className={styles.container}>
 
@@ -34,7 +47,7 @@ export default function Home() {
         </div>
 
       <div className={styles.cardLayout}>
-        {coffeeStores.map(coffeeStores=>{
+        {props.coffeeStores.map(coffeeStores=>{
           return ( 
                  <Card 
                     key={coffeeStores.id} //solution for "Warning: Each child in a list should have a unique “key” prop." message
