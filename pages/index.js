@@ -3,12 +3,12 @@ import Image from 'next/image'
 import styles from '@/styles/Home.module.css'
 import Banner from '../components/banner'
 import Card from '../components/card'
-import coffeeStores from '../data/coffee-stores.json'
+import coffeeStoresData  from '../data/coffee-stores.json'
 
 export async function getStaticProps(context) {
   return {
     props: {
-      coffeeStores,
+      coffeeStores:coffeeStoresData ,
     }, // will be passed to the page component as props
   };
 }
@@ -45,12 +45,14 @@ export default function Home(props) {
         alt="hero img"
         />
         </div>
-
+        {props.coffeeStores.length > 0 && (
+          <>
+      <h2 className={styles.heading2}>Toronto stores</h2>
       <div className={styles.cardLayout}>
         {props.coffeeStores.map(coffeeStores=>{
           return ( 
                  <Card 
-                    key={coffeeStores.id} //solution for "Warning: Each child in a list should have a unique “key” prop." message
+                    key={coffeeStores.id}
                     name={coffeeStores.name}
                     imURL={coffeeStores.imgUrl}
                     href={`/coffee-store/${coffeeStores.id}`}
@@ -58,6 +60,7 @@ export default function Home(props) {
                   />)
         })}
       </div>
+      </>)}
       </main>
     </div>
   )
